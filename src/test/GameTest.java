@@ -74,6 +74,33 @@ public class GameTest {
         game.roll(1);
         game.roll(1);
         assertEquals(game.score(), 10+1+1+(1+1));
+    }
 
+    @Test
+    public void gameWith2SeparatedStrikes(){
+        Game game = new Game();
+        game.roll(10);
+        game.roll(1);
+        game.roll(1);
+        game.roll(3);
+        game.roll(6);
+        game.roll(10);
+        game.roll(2);
+        game.roll(2);
+        assertEquals(game.score(), 10+1+1+(1+1)+3+6+10+2+2+(2+2));
+    }
+
+    @Test
+    public void gameWith2SeparatedStrikesAnd1Spare(){
+        Game game = new Game();
+        game.roll(10);
+        game.roll(1);
+        game.roll(1);
+        game.roll(4);
+        game.roll(6);
+        game.roll(10);
+        game.roll(2);
+        game.roll(2);
+        assertEquals(game.score(), 10+1+1+(1+1)+4+6+10+(10)+2+2+(2+2));
     }
 }
