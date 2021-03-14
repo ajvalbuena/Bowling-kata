@@ -8,6 +8,6 @@ public class Game {
     }
 
     public void roll(int pinsBlockedDown) {
-        this.score = pinsBlockedDown;
+        this.score += pinsBlockedDown;
     }
 }

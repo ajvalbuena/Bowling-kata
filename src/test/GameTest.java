@@ -19,4 +19,12 @@ public class GameTest {
         game.roll(5);
         assertEquals(game.score(), 5);
     }
+
+    @Test
+    public void gameWith2Rolls (){
+        Game game = new Game();
+        game.roll(5);
+        game.roll(3);
+        assertEquals(game.score(), 8);
+    }
 }
