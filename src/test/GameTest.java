@@ -21,10 +21,24 @@ public class GameTest {
     }
 
     @Test
-    public void gameWith2Rolls (){
+    public void gameWith1Frame(){
         Game game = new Game();
         game.roll(5);
         game.roll(3);
         assertEquals(game.score(), 8);
+    }
+
+    @Test
+    public void gameWith4NormalFrames(){
+        Game game = new Game();
+        game.roll(5);
+        game.roll(3);
+        game.roll(1);
+        game.roll(2);
+        game.roll(7);
+        game.roll(1);
+        game.roll(2);
+        game.roll(3);
+        assertEquals(game.score(), 24);
     }
 }
