@@ -43,7 +43,7 @@ public class GameTest {
     }
 
     @Test
-    public void gameWith1Strike(){
+    public void gameWith1Spare(){
         Game game = new Game();
         game.roll(8);
         game.roll(2);
@@ -53,7 +53,7 @@ public class GameTest {
     }
 
     @Test
-    public void gameWith2Strikes(){
+    public void gameWith2Spare(){
         Game game = new Game();
         game.roll(1);
         game.roll(0);

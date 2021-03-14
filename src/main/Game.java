@@ -4,7 +4,7 @@ public class Game {
     int score;
     int[][] frames = new int[10][2];
     int actualFrame;
-    boolean strikeFlag;
+    boolean spareFlag;
 
     public Game() {
         for (int i = 0; i < 10; i++) {
@@ -21,19 +21,19 @@ public class Game {
     public void roll(int pinsBlockedDown) {
         this.createFrame(pinsBlockedDown);
         this.sumScore(pinsBlockedDown);
-        this.isAStrike();
+        this.isAnSpare();
 
     }
 
     private void sumScore(int pinsBlockedDown) {
-        this.strikeBonus(pinsBlockedDown);
+        this.spareBonus(pinsBlockedDown);
         this.score += pinsBlockedDown;
     }
 
-    private void strikeBonus(int pinsBlockedDown) {
-        if (this.strikeFlag) {
+    private void spareBonus(int pinsBlockedDown) {
+        if (this.spareFlag) {
             this.score += pinsBlockedDown;
-            this.strikeFlag = false;
+            this.spareFlag = false;
         }
     }
 
@@ -49,9 +49,9 @@ public class Game {
         }
     }
 
-    private void isAStrike() {
+    private void isAnSpare() {
         if (this.frames[this.actualFrame][1] != -1) {
-            this.strikeFlag = this.frames[this.actualFrame][0] + this.frames[this.actualFrame][1] == 10;
+            this.spareFlag = this.frames[this.actualFrame][0] + this.frames[this.actualFrame][1] == 10;
         }
     }
 }
