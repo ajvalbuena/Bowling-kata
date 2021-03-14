@@ -5,6 +5,7 @@ public class Game {
     int[][] frames = new int[10][2];
     int actualFrame;
     boolean spareFlag;
+    boolean strikeFlag;
 
     public Game() {
         for (int i = 0; i < 10; i++) {
@@ -22,11 +23,13 @@ public class Game {
         this.createFrame(pinsBlockedDown);
         this.sumScore(pinsBlockedDown);
         this.isAnSpare();
+        this.isAStrike(pinsBlockedDown);
 
     }
 
     private void sumScore(int pinsBlockedDown) {
         this.spareBonus(pinsBlockedDown);
+        this.strikeBonus();
         this.score += pinsBlockedDown;
     }
 
@@ -34,6 +37,13 @@ public class Game {
         if (this.spareFlag) {
             this.score += pinsBlockedDown;
             this.spareFlag = false;
+        }
+    }
+
+    private void strikeBonus() {
+        if (this.strikeFlag & this.frames[this.actualFrame][1] != -1 ) {
+            this.score += this.frames[this.actualFrame][0] + this.frames[this.actualFrame][1];
+            this.strikeFlag = false;
         }
     }
 
@@ -53,5 +63,13 @@ public class Game {
         if (this.frames[this.actualFrame][1] != -1) {
             this.spareFlag = this.frames[this.actualFrame][0] + this.frames[this.actualFrame][1] == 10;
         }
+    }
+
+    private void isAStrike(int pinsBlockedDown){
+        if(pinsBlockedDown ==10){
+            this.frames[this.actualFrame][1] = 0;
+            this.strikeFlag = true;
+        }
+
     }
 }

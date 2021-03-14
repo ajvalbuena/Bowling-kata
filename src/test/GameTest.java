@@ -66,4 +66,14 @@ public class GameTest {
         game.roll(1);
         assertEquals(game.score(), 1+0+8+2+(5)+5+3+7+3+(1)+1);
     }
+
+    @Test
+    public void gameWith1Strike(){
+        Game game = new Game();
+        game.roll(10);
+        game.roll(1);
+        game.roll(1);
+        assertEquals(game.score(), 10+1+1+(1+1));
+
+    }
 }
