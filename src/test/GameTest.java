@@ -49,7 +49,7 @@ public class GameTest {
         game.roll(2);
         game.roll(5);
         game.roll(3);
-        assertEquals(game.score(), 10+5+5+3);
+        assertEquals(game.score(), 10+(5)+5+3);
     }
 
     @Test
@@ -103,4 +103,16 @@ public class GameTest {
         game.roll(2);
         assertEquals(game.score(), 10+1+1+(1+1)+4+6+10+(10)+2+2+(2+2));
     }
+
+//    @Test
+//    public void gameWith2StrikesTogether(){
+//        Game game = new Game();
+//        game.roll(1);
+//        game.roll(1);
+//        game.roll(10);
+//        game.roll(10);
+//        game.roll(1);
+//        game.roll(1);
+//        assertEquals(game.score(), 1+1+10+(10+1)+10+(1+1)+1+1);
+//    }
 }
