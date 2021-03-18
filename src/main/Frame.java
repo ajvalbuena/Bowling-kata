@@ -2,8 +2,7 @@ package main;
 
 public class Frame {
     boolean spareFlag;
-    boolean strikeFlag;
-
+    Strike strike;
     int[] rolls = new int[2];
 
     public Frame() {
@@ -14,9 +13,7 @@ public class Frame {
 
     public void roll(int pinsBlockedDown) {
         if (pinsBlockedDown == 10) {
-            this.rolls[0] = pinsBlockedDown;
-            this.rolls[1] = 0;
-            this.strikeFlag = true;
+            this.createAStrikeInFrame();
         } else if (this.rolls[0] == -1) {
             this.rolls[0] = pinsBlockedDown;
         } else {
@@ -25,31 +22,32 @@ public class Frame {
         }
     }
 
+    private void createAStrikeInFrame() {
+        this.strike = new Strike();
+        this.rolls[0] = 10;
+        this.rolls[1] = 0;
+    }
 
-    public int sumScore(int pinsBlockedDown, boolean spare, boolean strike) {
+
+    public int sumScore(int pinsBlockedDown, boolean spare, Strike strike) {
         int spareBonus = this.spareBonus(pinsBlockedDown, spare);
-        int strikeBonus = this.strikeBonus(strike);
+        int strikeBonus = this.strikeBonus(strike, pinsBlockedDown);
         return spareBonus + strikeBonus + pinsBlockedDown;
     }
 
     private int spareBonus(int pinsBlockedDown, boolean spare) {
-        if (spare) {
+        return spare ? pinsBlockedDown : 0;
+    }
+
+    private int strikeBonus(Strike strike, int pinsBlockedDown) {
+        if (strike !=null && !strike.isStrikeScoreCompleted()) {
+            strike.nextTwoRollsScore.add(pinsBlockedDown);
+            this.strike = strike;
             return pinsBlockedDown;
         }
         return 0;
-    }
 
-    private int strikeBonus(boolean strike) {
 
-        if (strike & this.rolls[1] == -1) {
-            this.strikeFlag = true;
-            return this.rolls[0];
-        } else if (strike & this.rolls[1] != -1) {
-            this.strikeFlag = false;
-            return this.rolls[1];
-        } else {
-            return 0;
-        }
     }
 
     public boolean isFrameCompleted() {
@@ -61,7 +59,4 @@ public class Frame {
         return spareFlag;
     }
 
-    public boolean isStrikeFlag() {
-        return strikeFlag;
-    }
 }
