@@ -1,14 +1,18 @@
 package main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Frame {
     boolean spareFlag;
-    Strike strike;
+    List<Strike> strikes;
     int[] rolls = new int[2];
 
     public Frame() {
         for (int j = 0; j < 2; j++) {
             this.rolls[j] = -1;
         }
+        strikes = new ArrayList<>();
     }
 
     public void roll(int pinsBlockedDown) {
@@ -23,15 +27,15 @@ public class Frame {
     }
 
     private void createAStrikeInFrame() {
-        this.strike = new Strike();
         this.rolls[0] = 10;
         this.rolls[1] = 0;
+        this.strikes.add(new Strike());
     }
 
 
-    public int sumScore(int pinsBlockedDown, boolean spare, Strike strike) {
+    public int sumScore(int pinsBlockedDown, boolean spare, List<Strike> strikes) {
         int spareBonus = this.spareBonus(pinsBlockedDown, spare);
-        int strikeBonus = this.strikeBonus(strike, pinsBlockedDown);
+        int strikeBonus = this.strikeBonus(strikes, pinsBlockedDown);
         return spareBonus + strikeBonus + pinsBlockedDown;
     }
 
@@ -39,15 +43,34 @@ public class Frame {
         return spare ? pinsBlockedDown : 0;
     }
 
-    private int strikeBonus(Strike strike, int pinsBlockedDown) {
-        if (strike !=null && !strike.isStrikeScoreCompleted()) {
-            strike.nextTwoRollsScore.add(pinsBlockedDown);
-            this.strike = strike;
-            return pinsBlockedDown;
+    private int strikeBonus(List<Strike> previousStrikes, int pinsBlockedDown) {
+        if (previousStrikes.isEmpty()) return 0;
+        int strikesScore = 0;
+        List<Strike> newStrikes = new ArrayList<>();
+        addMyOwnStrike(newStrikes);
+        for (Strike strike : previousStrikes) {
+            if (strike != null && !strike.isStrikeScoreCompleted()) {
+                strike.addRollScore(pinsBlockedDown);
+                newStrikes.add(strike);
+                strikesScore += pinsBlockedDown;
+            }
         }
-        return 0;
+
+        this.strikes = newStrikes;
+        return strikesScore;
 
 
+    }
+
+    private void addMyOwnStrike(List<Strike> newStrikes) {
+        if (!this.strikes.isEmpty()) {
+            this.strikes.forEach(strike -> {
+                if (strike.isNewStrike()) {
+                    newStrikes.add(strike);
+                }
+            });
+
+        }
     }
 
     public boolean isFrameCompleted() {

@@ -1,16 +1,20 @@
 package main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Game {
     int score;
     Frame[] frames = new Frame[10];
-    int actualFrame;
+    int currentFrame;
     boolean spareFlag;
-    Strike strike;
+    List<Strike> strikes;
 
     public Game() {
         for (int i = 0; i < 10; i++) {
             this.frames[i] = new Frame();
         }
+        strikes = new ArrayList<>();
     }
 
     public int score() {
@@ -19,9 +23,9 @@ public class Game {
 
     public void roll(int pinsBlockedDown) {
         this.play(pinsBlockedDown);
-        this.score += this.frames[actualFrame].sumScore(pinsBlockedDown, this.spareFlag, this.strike);
-        this.spareFlag = this.frames[this.actualFrame].isSpareFlag();
-        this.strike = this.frames[this.actualFrame].strike;
+        this.score += this.frames[currentFrame].sumScore(pinsBlockedDown, this.spareFlag, this.strikes);
+        this.spareFlag = this.frames[this.currentFrame].isSpareFlag();
+        this.strikes = this.frames[this.currentFrame].strikes;
     }
 
 
@@ -29,7 +33,7 @@ public class Game {
         for (int frame = 0; frame < 10; frame++) {
             if (!this.frames[frame].isFrameCompleted()) {
                 this.frames[frame].roll(pinsBlockedDown);
-                this.actualFrame = frame;
+                this.currentFrame = frame;
                 return;
             }
         }
