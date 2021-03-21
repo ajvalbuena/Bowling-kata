@@ -115,4 +115,25 @@ public class GameTest {
         game.roll(1);
         assertEquals(game.score(), 1+1+10+(10+1)+10+(1+1)+1+1);
     }
+
+    @Test
+    public void completedGame(){
+        Game game = new Game();
+        game.roll(3);
+        game.roll(7);
+        game.roll(10);
+        game.roll(10);
+        game.roll(10);
+        game.roll(10);
+        game.roll(8);
+        game.roll(2);
+        game.roll(10);
+        game.roll(5);
+        game.roll(5);
+        game.roll(1);
+        game.roll(0);
+        game.roll(2);
+        game.roll(7);
+        assertEquals(game.score(), 3+7+(10) +10+(10+10) +10+(10+10)+ 10+(10+8) + 10+(8+2) +8+2+(10) +10+(5+5) + 5+5+(1) + 1+0 +2+7);
+    }
 }
