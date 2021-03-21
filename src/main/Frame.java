@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Frame {
+    int[] rolls = new int[2];
     boolean spareFlag;
     List<Strike> strikes;
-    int[] rolls = new int[2];
 
     public Frame() {
         for (int j = 0; j < 2; j++) {
@@ -65,7 +65,6 @@ public class Frame {
                 newStrikes.add(strike);
             }
         });
-
     }
 
     public boolean isFrameCompleted() {
