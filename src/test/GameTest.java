@@ -2,9 +2,6 @@ package test;
 
 import main.Game;
 import org.junit.jupiter.api.Test;
-
-import java.util.stream.IntStream;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GameTest {
@@ -151,10 +148,11 @@ public class GameTest {
         game.roll(2);
         game.roll(3);
 
-        assertEquals(game.score(), 0+8+2+(3) +3);
+        assertEquals(game.score(), 0+8+2+3);
     }
+
     @Test
-    public void completedGameEndWith2Spares() {
+    public void trickGameEndWithASpare() {
         Game game = new Game();
         int times = 0;
         while (times < 18) {
@@ -164,10 +162,9 @@ public class GameTest {
         game.roll(8);
         game.roll(2);
         game.roll(3);
-        game.roll(7);
-        game.roll(1);
+        game.roll(3);
 
-        assertEquals(game.score(), 0+8+2+(3) +3+7+(1) +1);
+        assertEquals(game.score(), 0+8+2+3);
     }
 
     @Test
@@ -182,7 +179,7 @@ public class GameTest {
         game.roll(2);
         game.roll(3);
 
-        assertEquals(game.score(), 0+10+(2+3) +2+3);
+        assertEquals(game.score(), 0+10+2+3);
     }
 
     @Test
@@ -197,6 +194,34 @@ public class GameTest {
         game.roll(10);
         game.roll(3);
 
-        assertEquals(game.score(), 0+10+(10+3) +10+(3) +3);
+        assertEquals(game.score(), 0+10+10+3);
     }
+
+    @Test
+    public void completedGameEndWith3Strikes() {
+        Game game = new Game();
+        int times = 0;
+        while (times < 18) {
+            game.roll(0);
+            times++;
+        }
+        game.roll(10);
+        game.roll(10);
+        game.roll(10);
+
+        assertEquals(game.score(), 0+10+10+10);
+    }
+
+    @Test
+    public void highestScoreGame() {
+        Game game = new Game();
+        int times = 0;
+        while (times < 12) {
+            game.roll(10);
+            times++;
+        }
+
+        assertEquals(game.score(), 300);
+    }
+
 }
