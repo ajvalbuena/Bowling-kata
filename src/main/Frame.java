@@ -42,9 +42,7 @@ public abstract class Frame {
 
 
     public List<Bonus> getBonuses() {
-        List<Bonus> allBonuses = new ArrayList<>();
-        allBonuses.addAll(bonuses);
-        return allBonuses;
+        return new ArrayList<>(bonuses);
     }
 
 
