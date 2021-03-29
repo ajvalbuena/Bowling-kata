@@ -29,4 +29,7 @@ public class Bonus {
     public static Bonus spare(){
         return new Bonus(1);
     }
+    public static Bonus noBonus(){
+        return new Bonus(0);
+    }
 }
