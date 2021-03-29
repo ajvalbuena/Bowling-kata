@@ -4,24 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Frame {
-    List<Spare> spare;
-    List<Strike> strikes;
+    List<Bonus> spare;
+    List<Bonus> bonuses;
 
     public Frame() {
-        strikes = new ArrayList<>();
+        bonuses = new ArrayList<>();
         spare = new ArrayList<>();
     }
 
-    public int sumScore(int pinsBlockedDown, List<Spare> spare, List<Strike> strikes) {
+    public int sumScore(int pinsBlockedDown, List<Bonus> spare, List<Bonus> bonuses) {
         int spareBonus = this.spareBonus(pinsBlockedDown, spare);
-        int strikeBonus = this.strikeBonus(strikes, pinsBlockedDown);
+        int strikeBonus = this.strikeBonus(bonuses, pinsBlockedDown);
         return spareBonus + strikeBonus + pinsBlockedDown;
     }
 
 
-    private int spareBonus(int pinsBlockedDown, List<Spare> spare) {
+    private int spareBonus(int pinsBlockedDown, List<Bonus> spare) {
         if (spare.isEmpty()) return 0;
-        for (Spare s : spare) {
+        for (Bonus s : spare) {
             if (!s.isStrikeScoreCompleted()) {
                 s.addRollScore(pinsBlockedDown);
                 return pinsBlockedDown;
@@ -30,37 +30,37 @@ public abstract class Frame {
         return 0;
     }
 
-    private int strikeBonus(List<Strike> previousStrikes, int pinsBlockedDown) {
-        if (previousStrikes.isEmpty()) return 0;
+    private int strikeBonus(List<Bonus> previousBonuses, int pinsBlockedDown) {
+        if (previousBonuses.isEmpty()) return 0;
         int strikesScore = 0;
-        List<Strike> newStrikes = new ArrayList<>();
-        this.addMyOwnStrike(newStrikes);
-        for (Strike strike : previousStrikes) {
-            if (!strike.isStrikeScoreCompleted()) {
-                strike.addRollScore(pinsBlockedDown);
-                newStrikes.add(strike);
+        List<Bonus> newBonuses = new ArrayList<>();
+        this.addMyOwnStrike(newBonuses);
+        for (Bonus bonus : previousBonuses) {
+            if (!bonus.isStrikeScoreCompleted()) {
+                bonus.addRollScore(pinsBlockedDown);
+                newBonuses.add(bonus);
                 strikesScore += pinsBlockedDown;
             }
         }
-        this.strikes = newStrikes;
+        this.bonuses = newBonuses;
         return strikesScore;
     }
 
-    private void addMyOwnStrike(List<Strike> newStrikes) {
-        this.strikes.forEach(strike -> {
-            if (strike.isNewStrike()) {
-                newStrikes.add(strike);
+    private void addMyOwnStrike(List<Bonus> newBonuses) {
+        this.bonuses.forEach(bonus -> {
+            if (bonus.isNewStrike()) {
+                newBonuses.add(bonus);
             }
         });
     }
 
-    public List<Spare>  getSpare() {
+    public List<Bonus>  getSpare() {
         return new ArrayList<>(this.spare);
     }
 
 
-    public List<Strike> getStrikes() {
-        return new ArrayList<>(this.strikes);
+    public List<Bonus> getStrikes() {
+        return new ArrayList<>(this.bonuses);
     }
 
 

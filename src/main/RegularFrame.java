@@ -1,6 +1,5 @@
 package main;
 
-import java.util.ArrayList;
 
 public class RegularFrame extends Frame{
     int[] rolls = new int[2];
@@ -28,7 +27,7 @@ public class RegularFrame extends Frame{
     private void createAStrikeInFrame() {
         this.rolls[0] = 10;
         this.rolls[1] = 0;
-        this.strikes.add(new Strike());
+        this.bonuses.add(new Strike());
     }
 
 
