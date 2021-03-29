@@ -13,15 +13,11 @@ public abstract class Frame {
     }
 
     public int sumScore(int pinsBlockedDown, List<Bonus> spare, List<Bonus> bonuses) {
-        int spareBonus = this.spareBonus(pinsBlockedDown, spare);
+        int spareBonus = strikeBonus(spare, pinsBlockedDown);
         int strikeBonus = this.strikeBonus(bonuses, pinsBlockedDown);
         return spareBonus + strikeBonus + pinsBlockedDown;
     }
 
-
-    private int spareBonus(int pinsBlockedDown, List<Bonus> spare) {
-        return strikeBonus(spare, pinsBlockedDown);
-    }
 
     private int strikeBonus(List<Bonus> previousBonuses, int pinsBlockedDown) {
         if (previousBonuses.isEmpty()) return 0;
