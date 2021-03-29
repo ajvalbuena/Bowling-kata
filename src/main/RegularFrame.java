@@ -19,7 +19,7 @@ public class RegularFrame extends Frame{
         } else {
             this.rolls[1] = pinsBlockedDown;
             if(this.rolls[0] + this.rolls[1] == 10) {
-                this.bonuses.add(new Bonus(1));
+                this.bonuses.add(Bonus.spare());
             }
         }
     }
@@ -27,7 +27,7 @@ public class RegularFrame extends Frame{
     private void createAStrikeInFrame() {
         this.rolls[0] = 10;
         this.rolls[1] = 0;
-        this.bonuses.add(new Bonus(2));
+        this.bonuses.add(Bonus.strike());
     }
 
 

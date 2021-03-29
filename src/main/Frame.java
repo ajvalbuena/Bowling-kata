@@ -22,7 +22,7 @@ public abstract class Frame {
         List<Bonus> newBonuses = new ArrayList<>();
         this.addMyOwnStrike(newBonuses);
         for (Bonus bonus : previousBonuses) {
-            if (!bonus.isStrikeScoreCompleted()) {
+            if (!bonus.isBonusScoreCompleted()) {
                 bonus.addRollScore(pinsBlockedDown);
                 newBonuses.add(bonus);
                 strikesScore += pinsBlockedDown;
@@ -34,7 +34,7 @@ public abstract class Frame {
 
     private void addMyOwnStrike(List<Bonus> newBonuses) {
         this.bonuses.forEach(bonus -> {
-            if (bonus.isNewStrike()) {
+            if (bonus.isNewBonus()) {
                 newBonuses.add(bonus);
             }
         });
