@@ -7,7 +7,7 @@ public class Game {
     int score;
     Frame[] frames = new Frame[10];
     int currentFrame;
-    boolean spareFlag;
+    List<Spare> spare;
     List<Strike> strikes;
     boolean gameCompleted;
 
@@ -18,6 +18,8 @@ public class Game {
         this.frames[9] = new LastFrame();
 
         strikes = new ArrayList<>();
+        spare = new ArrayList<>();
+
         gameCompleted =false;
     }
 
@@ -27,10 +29,11 @@ public class Game {
 
     public void roll(int pinsBlockedDown) {
         this.play(pinsBlockedDown);
-       if(!gameCompleted){
-        this.score += this.frames[currentFrame].sumScore(pinsBlockedDown, this.spareFlag, this.strikes);
-        this.spareFlag = this.frames[this.currentFrame].isSpareFlag();
-        this.strikes = this.frames[this.currentFrame].getStrikes();}
+       if(!gameCompleted) {
+           this.score += this.frames[currentFrame].sumScore(pinsBlockedDown, spare, this.strikes);
+           this.spare = this.frames[this.currentFrame].getSpare();
+           this.strikes = this.frames[this.currentFrame].getStrikes();
+       }
 
     }
 

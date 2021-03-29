@@ -4,22 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Frame {
-    boolean spareFlag;
+    List<Spare> spare;
     List<Strike> strikes;
 
     public Frame() {
         strikes = new ArrayList<>();
+        spare = new ArrayList<>();
     }
 
-    public int sumScore(int pinsBlockedDown, boolean spare, List<Strike> strikes) {
+    public int sumScore(int pinsBlockedDown, List<Spare> spare, List<Strike> strikes) {
         int spareBonus = this.spareBonus(pinsBlockedDown, spare);
         int strikeBonus = this.strikeBonus(strikes, pinsBlockedDown);
         return spareBonus + strikeBonus + pinsBlockedDown;
     }
 
 
-    private int spareBonus(int pinsBlockedDown, boolean spare) {
-        return spare ? pinsBlockedDown : 0;
+    private int spareBonus(int pinsBlockedDown, List<Spare> spare) {
+        if (spare.isEmpty()) return 0;
+        for (Spare s : spare) {
+            if (!s.isStrikeScoreCompleted()) {
+                s.addRollScore(pinsBlockedDown);
+                return pinsBlockedDown;
+            }
+        }
+        return 0;
     }
 
     private int strikeBonus(List<Strike> previousStrikes, int pinsBlockedDown) {
@@ -46,13 +54,13 @@ public abstract class Frame {
         });
     }
 
-    public boolean isSpareFlag() {
-        return spareFlag;
+    public List<Spare>  getSpare() {
+        return new ArrayList<>(this.spare);
     }
 
 
     public List<Strike> getStrikes() {
-        return this.strikes;
+        return new ArrayList<>(this.strikes);
     }
 
 

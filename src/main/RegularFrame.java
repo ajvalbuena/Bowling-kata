@@ -1,7 +1,6 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RegularFrame extends Frame{
     int[] rolls = new int[2];
@@ -20,7 +19,9 @@ public class RegularFrame extends Frame{
             this.rolls[0] = pinsBlockedDown;
         } else {
             this.rolls[1] = pinsBlockedDown;
-            this.spareFlag = this.rolls[0] + this.rolls[1] == 10;
+            if(this.rolls[0] + this.rolls[1] == 10) {
+                this.spare.add(new Spare());
+            }
         }
     }
 
