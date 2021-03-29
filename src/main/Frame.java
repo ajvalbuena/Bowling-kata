@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Frame {
-    List<Bonus> spare;
     List<Bonus> bonuses;
 
     public Frame() {
         bonuses = new ArrayList<>();
-        spare = new ArrayList<>();
     }
 
     public int sumScore(int pinsBlockedDown, List<Bonus> bonuses) {
@@ -42,15 +40,10 @@ public abstract class Frame {
         });
     }
 
-    public List<Bonus> getSpare() {
-        return new ArrayList<>(this.spare);
-    }
 
-
-    public List<Bonus> getStrikes() {
+    public List<Bonus> getBonuses() {
         List<Bonus> allBonuses = new ArrayList<>();
         allBonuses.addAll(bonuses);
-        allBonuses.addAll(spare);
         return allBonuses;
     }
 

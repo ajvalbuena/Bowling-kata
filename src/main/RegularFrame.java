@@ -19,7 +19,7 @@ public class RegularFrame extends Frame{
         } else {
             this.rolls[1] = pinsBlockedDown;
             if(this.rolls[0] + this.rolls[1] == 10) {
-                this.spare.add(new Spare());
+                this.bonuses.add(new Spare());
             }
         }
     }

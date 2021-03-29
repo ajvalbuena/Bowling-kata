@@ -7,7 +7,6 @@ public class Game {
     int score;
     Frame[] frames = new Frame[10];
     int currentFrame;
-    List<Bonus> spare;
     List<Bonus> bonuses;
     boolean gameCompleted;
 
@@ -18,8 +17,6 @@ public class Game {
         this.frames[9] = new LastFrame();
 
         bonuses = new ArrayList<>();
-        spare = new ArrayList<>();
-
         gameCompleted =false;
     }
 
@@ -31,7 +28,7 @@ public class Game {
         this.play(pinsBlockedDown);
        if(!gameCompleted) {
            this.score += this.frames[currentFrame].sumScore(pinsBlockedDown, bonuses);
-           this.bonuses = this.frames[this.currentFrame].getStrikes();
+           this.bonuses = this.frames[this.currentFrame].getBonuses();
        }
 
     }
