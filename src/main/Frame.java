@@ -20,14 +20,7 @@ public abstract class Frame {
 
 
     private int spareBonus(int pinsBlockedDown, List<Bonus> spare) {
-        if (spare.isEmpty()) return 0;
-        for (Bonus s : spare) {
-            if (!s.isStrikeScoreCompleted()) {
-                s.addRollScore(pinsBlockedDown);
-                return pinsBlockedDown;
-            }
-        }
-        return 0;
+        return strikeBonus(spare, pinsBlockedDown);
     }
 
     private int strikeBonus(List<Bonus> previousBonuses, int pinsBlockedDown) {
@@ -54,7 +47,7 @@ public abstract class Frame {
         });
     }
 
-    public List<Bonus>  getSpare() {
+    public List<Bonus> getSpare() {
         return new ArrayList<>(this.spare);
     }
 
