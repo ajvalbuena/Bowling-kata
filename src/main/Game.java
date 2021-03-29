@@ -30,7 +30,10 @@ public class Game {
     public void roll(int pinsBlockedDown) {
         this.play(pinsBlockedDown);
        if(!gameCompleted) {
-           this.score += this.frames[currentFrame].sumScore(pinsBlockedDown, spare, this.bonuses);
+           List<Bonus> allBonuses = new ArrayList<>();
+           allBonuses.addAll(bonuses);
+           allBonuses.addAll(spare);
+           this.score += this.frames[currentFrame].sumScore(pinsBlockedDown, allBonuses);
            this.spare = this.frames[this.currentFrame].getSpare();
            this.bonuses = this.frames[this.currentFrame].getStrikes();
        }

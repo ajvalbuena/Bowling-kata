@@ -12,10 +12,10 @@ public abstract class Frame {
         spare = new ArrayList<>();
     }
 
-    public int sumScore(int pinsBlockedDown, List<Bonus> spare, List<Bonus> bonuses) {
-        int spareBonus = strikeBonus(spare, pinsBlockedDown);
-        int strikeBonus = this.strikeBonus(bonuses, pinsBlockedDown);
-        return spareBonus + strikeBonus + pinsBlockedDown;
+    public int sumScore(int pinsBlockedDown, List<Bonus> bonuses) {
+
+        int spareBonus = strikeBonus(bonuses, pinsBlockedDown);
+        return spareBonus + pinsBlockedDown;
     }
 
 
