@@ -11,11 +11,25 @@ public class Bonus {
         this.bonusNextRolls = bonusNextRolls;
     }
 
-    public void addRollScore(int pinsBlockedDown) {
+    public static Bonus createBonus(int[] rolls) {
+        if (rolls[0] == 10) return strike();
+        if (rolls[0] + rolls[1] == 10) return spare();
+        return noBonus();
+    }
+
+    public int scoreForBonus(int pinsBlockedDown) {
+        if (!this.isBonusScoreCompleted()) {
+            this.fillBonus(pinsBlockedDown);
+            return pinsBlockedDown;
+        }
+        return 0;
+    }
+
+    private void fillBonus(int pinsBlockedDown) {
         this.nextRollsScore.add(pinsBlockedDown);
     }
 
-    public boolean isBonusScoreCompleted() {
+    private boolean isBonusScoreCompleted() {
         return this.nextRollsScore.size() == bonusNextRolls;
     }
 
@@ -31,9 +45,5 @@ public class Bonus {
         return new Bonus(0);
     }
 
-    public static Bonus createBonus(int[] rolls) {
-        if (rolls[0] == 10) return strike();
-        if (rolls[0] + rolls[1] == 10) return spare();
-        return noBonus();
-    }
+
 }

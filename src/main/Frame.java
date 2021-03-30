@@ -18,10 +18,7 @@ public abstract class Frame {
         if (previousBonuses.isEmpty()) return 0;
         int strikesScore = 0;
         for (Bonus bonus : previousBonuses) {
-            if (!bonus.isBonusScoreCompleted()) {
-                bonus.addRollScore(pinsBlockedDown);
-                strikesScore += pinsBlockedDown;
-            }
+            strikesScore += bonus.scoreForBonus(pinsBlockedDown);
         }
         return strikesScore;
     }
