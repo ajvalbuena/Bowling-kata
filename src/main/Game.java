@@ -28,6 +28,7 @@ public class Game {
         this.play(pinsBlockedDown);
        if(!gameCompleted) {
            score += frames[currentFrame].sumScore(pinsBlockedDown, bonuses);
+           bonuses.add(frames[currentFrame].getFrameBonus());
        }
     }
 
