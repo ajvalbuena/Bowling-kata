@@ -12,11 +12,14 @@ public class LastFrame extends Frame {
 
     @Override
     public void roll(int pinsBlockedDown) {
-        if (this.rolls[0] == -1) this.rolls[0] = pinsBlockedDown;
-        else if (this.rolls[1] == -1) {
+        if (this.rolls[0] == -1) {
+            this.rolls[0] = pinsBlockedDown;
+        } else if (this.rolls[1] == -1) {
             this.rolls[1] = pinsBlockedDown;
             this.closeExtraRoll();
-        } else if (this.rolls[2] == -1) this.rolls[2] = pinsBlockedDown;
+        } else if (this.rolls[2] == -1) {
+            this.rolls[2] = pinsBlockedDown;
+        }
 
     }
 
