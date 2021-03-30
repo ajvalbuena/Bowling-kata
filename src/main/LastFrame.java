@@ -4,7 +4,7 @@ public class LastFrame extends Frame {
     int[] rolls = new int[3];
 
     public LastFrame() {
-       super();
+        super();
         for (int j = 0; j < 3; j++) {
             this.rolls[j] = -1;
         }
@@ -12,7 +12,7 @@ public class LastFrame extends Frame {
 
     @Override
     public void roll(int pinsBlockedDown) {
-        if(this.rolls[0] == -1) this.rolls[0] = pinsBlockedDown;
+        if (this.rolls[0] == -1) this.rolls[0] = pinsBlockedDown;
         else if (this.rolls[1] == -1) {
             this.rolls[1] = pinsBlockedDown;
             this.closeExtraRoll();
@@ -20,8 +20,8 @@ public class LastFrame extends Frame {
 
     }
 
-    private void closeExtraRoll (){
-        if(rolls[0] !=10 && rolls[1] !=10 && this.rolls[0] + this.rolls[1] != 10 )this.rolls[2] =0;
+    private void closeExtraRoll() {
+        if (rolls[0] != 10 && rolls[1] != 10 && this.rolls[0] + this.rolls[1] != 10) this.rolls[2] = 0;
     }
 
 

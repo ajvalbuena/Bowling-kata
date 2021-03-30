@@ -10,41 +10,24 @@ public abstract class Frame {
         bonuses = new ArrayList<>();
     }
 
-    public int sumScore(int pinsBlockedDown, List<Bonus> bonuses) {
-        int spareBonus = strikeBonus(bonuses, pinsBlockedDown);
-        return spareBonus + pinsBlockedDown;
+    public int sumScore(int pinsBlockedDown, List<Bonus> previousBonuses) {
+        int bonusScore = bonusScore(previousBonuses, pinsBlockedDown);
+        previousBonuses.addAll(this.bonuses);
+        return bonusScore + pinsBlockedDown;
     }
 
 
-    private int strikeBonus(List<Bonus> previousBonuses, int pinsBlockedDown) {
+    private int bonusScore(List<Bonus> previousBonuses, int pinsBlockedDown) {
         if (previousBonuses.isEmpty()) return 0;
         int strikesScore = 0;
-        List<Bonus> newBonuses = new ArrayList<>();
-        this.addMyOwnStrike(newBonuses);
         for (Bonus bonus : previousBonuses) {
             if (!bonus.isBonusScoreCompleted()) {
                 bonus.addRollScore(pinsBlockedDown);
-                newBonuses.add(bonus);
                 strikesScore += pinsBlockedDown;
             }
         }
-        this.bonuses = newBonuses;
         return strikesScore;
     }
-
-    private void addMyOwnStrike(List<Bonus> newBonuses) {
-        this.bonuses.forEach(bonus -> {
-            if (bonus.isNewBonus()) {
-                newBonuses.add(bonus);
-            }
-        });
-    }
-
-
-    public List<Bonus> getBonuses() {
-        return new ArrayList<>(bonuses);
-    }
-
 
     abstract public void roll(int pinsBlockedDown);
 

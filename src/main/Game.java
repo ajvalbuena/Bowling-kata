@@ -28,9 +28,7 @@ public class Game {
         this.play(pinsBlockedDown);
        if(!gameCompleted) {
            this.score += this.frames[currentFrame].sumScore(pinsBlockedDown, bonuses);
-           this.bonuses = this.frames[this.currentFrame].getBonuses();
        }
-
     }
 
 

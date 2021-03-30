@@ -19,10 +19,6 @@ public class Bonus {
         return this.nextRollsScore.size() == bonusNextRolls;
     }
 
-    public boolean isNewBonus() {
-        return this.nextRollsScore.isEmpty();
-    }
-
     private static Bonus strike() {
         return new Bonus(2);
     }
