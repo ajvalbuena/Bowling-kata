@@ -21,13 +21,13 @@ public class Game {
     }
 
     public int score() {
-        return this.score;
+        return score;
     }
 
     public void roll(int pinsBlockedDown) {
         this.play(pinsBlockedDown);
        if(!gameCompleted) {
-           this.score += this.frames[currentFrame].sumScore(pinsBlockedDown, bonuses);
+           score += frames[currentFrame].sumScore(pinsBlockedDown, bonuses);
        }
     }
 

@@ -1,18 +1,17 @@
 package main;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Frame {
-    List<Bonus> bonuses;
+    Bonus frameBonus;
 
     public Frame() {
-        bonuses = new ArrayList<>();
+        this.frameBonus = Bonus.noBonus();
     }
 
     public int sumScore(int pinsBlockedDown, List<Bonus> previousBonuses) {
         int bonusScore = bonusScore(previousBonuses, pinsBlockedDown);
-        previousBonuses.addAll(this.bonuses);
+        previousBonuses.add(this.frameBonus);
         return bonusScore + pinsBlockedDown;
     }
 

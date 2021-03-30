@@ -27,7 +27,7 @@ public class Bonus {
         return new Bonus(1);
     }
 
-    private static Bonus noBonus() {
+    public static Bonus noBonus() {
         return new Bonus(0);
     }
 

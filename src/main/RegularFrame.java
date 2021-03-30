@@ -20,7 +20,7 @@ public class RegularFrame extends Frame{
         } else {
             this.rolls[1] = pinsBlockedDown;
         }
-        this.bonuses.add(Bonus.createBonus(rolls));
+        this.frameBonus = Bonus.createBonus(rolls);
     }
 
 
