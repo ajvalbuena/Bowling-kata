@@ -12,7 +12,9 @@ public abstract class Frame {
     public int sumScore(int pinsBlockedDown, List<Bonus> previousBonuses) {
         return pinsBlockedDown + bonusScore(previousBonuses, pinsBlockedDown);
     }
-
+    public Bonus getFrameBonus() {
+        return frameBonus;
+    }
 
     private int bonusScore(List<Bonus> previousBonuses, int pinsBlockedDown) {
         if (previousBonuses.isEmpty()) return 0;
@@ -21,10 +23,6 @@ public abstract class Frame {
             strikesScore += bonus.scoreForBonus(pinsBlockedDown);
         }
         return strikesScore;
-    }
-
-    public Bonus getFrameBonus() {
-        return frameBonus;
     }
 
     abstract public void roll(int pinsBlockedDown);

@@ -20,7 +20,6 @@ public class LastFrame extends Frame {
         } else if (this.rolls[2] == -1) {
             this.rolls[2] = pinsBlockedDown;
         }
-
     }
 
     private void closeExtraRoll() {

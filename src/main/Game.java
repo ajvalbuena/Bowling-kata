@@ -17,7 +17,7 @@ public class Game {
         this.frames[9] = new LastFrame();
 
         bonuses = new ArrayList<>();
-        gameCompleted =false;
+        gameCompleted = false;
     }
 
     public int score() {
@@ -25,26 +25,23 @@ public class Game {
     }
 
     public void roll(int pinsBlockedDown) {
-        this.play(pinsBlockedDown);
-       if(!gameCompleted) {
-           score += frames[currentFrame].sumScore(pinsBlockedDown, bonuses);
-           bonuses.add(frames[currentFrame].getFrameBonus());
-       }
+        play(pinsBlockedDown);
+        if (!gameCompleted) {
+            score += frames[currentFrame].sumScore(pinsBlockedDown, bonuses);
+            bonuses.add(frames[currentFrame].getFrameBonus());
+        }
     }
 
 
     private void play(int pinsBlockedDown) {
         for (int frame = 0; frame < 10; frame++) {
-            if (!this.frames[frame].isFrameCompleted()) {
-                this.frames[frame].roll(pinsBlockedDown);
-                this.currentFrame = frame;
+            if (!frames[frame].isFrameCompleted()) {
+                frames[frame].roll(pinsBlockedDown);
+                currentFrame = frame;
                 return;
             }
-
         }
-        if (this.currentFrame == 9) {
-            this.gameCompleted = true;
-        }
+        gameCompleted = this.currentFrame == 9 ? true : gameCompleted;
     }
 
 }

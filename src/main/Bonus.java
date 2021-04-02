@@ -5,10 +5,10 @@ import java.util.List;
 
 public class Bonus {
     private final List<Integer> nextRollsScore = new ArrayList<>();
-    private final int bonusNextRolls;
+    private final int bonusNextRollsSize;
 
-    private Bonus(int bonusNextRolls) {
-        this.bonusNextRolls = bonusNextRolls;
+    private Bonus(int bonusNextRollsSize) {
+        this.bonusNextRollsSize = bonusNextRollsSize;
     }
 
     public static Bonus createBonus(int[] rolls) {
@@ -30,7 +30,7 @@ public class Bonus {
     }
 
     private boolean isBonusScoreCompleted() {
-        return this.nextRollsScore.size() == bonusNextRolls;
+        return this.nextRollsScore.size() == bonusNextRollsSize;
     }
 
     private static Bonus strike() {
@@ -44,6 +44,5 @@ public class Bonus {
     public static Bonus noBonus() {
         return new Bonus(0);
     }
-
 
 }
