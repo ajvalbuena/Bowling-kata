@@ -16,6 +16,11 @@ public abstract class Frame {
         return frameBonus;
     }
 
+    public static Frame createNewFrame (int index){
+        if(index ==9) return new LastFrame();
+        return new RegularFrame();
+    }
+
     private int bonusScore(List<Bonus> previousBonuses, int pinsBlockedDown) {
         if (previousBonuses.isEmpty()) return 0;
         int strikesScore = 0;

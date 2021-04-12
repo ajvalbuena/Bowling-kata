@@ -2,20 +2,16 @@ package main;
 
 import java.util.ArrayList;
 import java.util.List;
+import static java.util.stream.IntStream.range;
 
 public class Game {
-    int score;
-    Frame[] frames = new Frame[10];
-    int currentFrame;
-    List<Bonus> bonuses;
-    boolean gameCompleted;
+    private int score;
+    private Frame[] frames = range(0,10).mapToObj(Frame::createNewFrame).toArray(Frame[]::new);
+    private int currentFrame;
+    private List<Bonus> bonuses;
+    private boolean gameCompleted;
 
     public Game() {
-        for (int i = 0; i < 9; i++) {
-            this.frames[i] = new RegularFrame();
-        }
-        this.frames[9] = new LastFrame();
-
         bonuses = new ArrayList<>();
         gameCompleted = false;
     }
