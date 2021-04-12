@@ -3,17 +3,9 @@ package main;
 import java.util.List;
 
 public abstract class Frame {
-    Bonus frameBonus;
-
-    public Frame() {
-        this.frameBonus = Bonus.noBonus();
-    }
 
     public int sumScore(int pinsBlockedDown, List<Bonus> previousBonuses) {
         return pinsBlockedDown + bonusScore(previousBonuses, pinsBlockedDown);
-    }
-    public Bonus getFrameBonus() {
-        return frameBonus;
     }
 
     public static Frame createNewFrame (int index){
@@ -30,7 +22,7 @@ public abstract class Frame {
         return strikesScore;
     }
 
-    abstract public void roll(int pinsBlockedDown);
+    abstract public Bonus roll(int pinsBlockedDown);
 
     abstract public boolean isFrameCompleted();
 

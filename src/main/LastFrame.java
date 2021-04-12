@@ -11,7 +11,7 @@ public class LastFrame extends Frame {
     }
 
     @Override
-    public void roll(int pinsBlockedDown) {
+    public Bonus roll(int pinsBlockedDown) {
         if (this.rolls[0] == -1) {
             this.rolls[0] = pinsBlockedDown;
         } else if (this.rolls[1] == -1) {
@@ -20,6 +20,7 @@ public class LastFrame extends Frame {
         } else if (this.rolls[2] == -1) {
             this.rolls[2] = pinsBlockedDown;
         }
+        return Bonus.noBonus();
     }
 
     private void closeExtraRoll() {

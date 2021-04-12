@@ -17,23 +17,24 @@ public class Game {
 
     public void roll(int pinsBlockedDown) {
         if(completeGame()) return;
-        play(pinsBlockedDown);
+        Bonus bonus = play(pinsBlockedDown);
         score += frames[currentFrame].sumScore(pinsBlockedDown, bonuses);
-        bonuses.add(frames[currentFrame].getFrameBonus());
+        bonuses.add(bonus);
     }
 
     private boolean completeGame() {
         return currentFrame == 10 || (currentFrame == 9 && frames[currentFrame].isFrameCompleted());
     }
 
-    private void play(int pinsBlockedDown) {
+    private Bonus play(int pinsBlockedDown) {
         for (int frame = 0; frame < 10; frame++) {
             if (!frames[frame].isFrameCompleted()) {
-                frames[frame].roll(pinsBlockedDown);
+                Bonus bonus = frames[frame].roll(pinsBlockedDown);
                 currentFrame = frame;
-                return;
+                return bonus;
             }
         }
+        return Bonus.noBonus();
     }
 
 }

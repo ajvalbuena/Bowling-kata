@@ -11,7 +11,7 @@ public class RegularFrame extends Frame{
         }
     }
 
-    public void roll(int pinsBlockedDown) {
+    public Bonus roll(int pinsBlockedDown) {
         if (pinsBlockedDown == 10) {
             this.rolls[0] = 10;
             this.rolls[1] = 0;
@@ -20,7 +20,7 @@ public class RegularFrame extends Frame{
         } else {
             this.rolls[1] = pinsBlockedDown;
         }
-        this.frameBonus = Bonus.createBonus(rolls);
+        return Bonus.createBonus(rolls);
     }
 
 
