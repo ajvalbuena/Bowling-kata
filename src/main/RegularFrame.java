@@ -2,7 +2,7 @@ package main;
 
 
 public class RegularFrame extends Frame{
-    int[] rolls = new int[2];
+    private int[] rolls = new int[2];
 
     public RegularFrame() {
         super();

@@ -1,7 +1,7 @@
 package main;
 
 public class LastFrame extends Frame {
-    int[] rolls = new int[3];
+    private int[] rolls = new int[3];
 
     public LastFrame() {
         super();
